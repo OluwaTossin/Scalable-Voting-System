@@ -227,3 +227,56 @@ spec:
           image: kodekloud/examplevotingapp_worker:v1
 
 ```
+## Step 6: Deployment Configuration and service for Result Application
+- Lastly, I drafted a deployment configuration for the Result Application, which displays voting outcomes to users.
+- This configuration was saved in the result-app-deploy.yaml file and result-app-service.yaml.
+
+result-app-deploy.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app-deploy
+  labels:
+    name: result-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: result-app-pod
+      app: demo-voting-app
+    
+  template:
+    metadata:
+      name: result-app-pod
+      labels:
+        name: result-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: result-app
+          image: kodekloud/examplevotingapp_result:v1
+          ports:
+            - containerPort: 80
+
+```
+result-app-service.yaml
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  labels:
+    name: result-service
+    app: demo-voting-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    name: result-app-pod
+    app: demo-voting-app
+```
