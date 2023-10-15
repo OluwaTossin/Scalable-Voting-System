@@ -63,3 +63,76 @@ spec:
             - containerPort: 80
 ```
 
+## Step 3:
+Next is to create a redis deployment. Create a definition file with the below:
+redis-deploy.yaml
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels:
+    name: redis-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis-pod
+      app: demo-voting-app
+    
+  template:
+    metadata:
+      name: redis-pod
+      labels:
+        name: redis-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
+```
+
+## Step 4: create a postgress.deployment.yaml with the below:
+•	For the database layer of our application, I set up a PostgreSQL deployment.
+•	The deployment configuration was established in a file named postgres-deployment.yaml with the details outlined below:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+  labels:
+    name: postgres-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-pod
+      app: demo-voting-app
+    
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
+
+```
