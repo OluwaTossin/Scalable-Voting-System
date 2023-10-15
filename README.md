@@ -282,10 +282,11 @@ spec:
 ```
 With all deployment definition files ready, it's time to switch to the terminal. Here, I'll initiate the deployment processes and configure their respective services for seamless interactions.
 
-#Terminal Steps for Deployment
+## Terminal Steps for Deployment
 
 ## Step 1:
 Begin by ensuring the cluster is free from any non-default pods and services.
+
 `kubectl get pods`
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/fe8da23e-48a2-498a-a988-07cfccb4bd80)
@@ -302,6 +303,7 @@ Initiate the deployment for the voting app using:
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/16cc008e-e83c-4daa-be84-bb87b177facf)
 
 Once the deployment is completed, proceed with creating the associated service:
+
 `kubectl create -f voting-app-service.yaml`
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/35c09ad0-e89e-4800-8060-be0b620bf5a7)
@@ -315,13 +317,101 @@ The output should indicate that the voting app is up and operational.
 
 ## Step 3: Deployment of Redis
 Now, let's establish the Redis deployment using:
+
 `kubectl create -f redis-deploy.yaml`
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/91c49cb6-bc77-44b5-b833-5516e28ac3d3)
 
 Once deployed, it's time to create the corresponding service for Redis:
+
 `kubectl create -f redis-service.yaml`
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/a129ebe2-0a5b-4b29-82f3-743b440d05ab)
 
+## Step 4: Deployment of PostgreSQL
 
+Deploy PostgreSQL using the following command:
+
+`kubectl create -f postgres-deploy.yaml`
+
+Once the deployment has completed, initiate the associated service:
+
+`kubectl create -f postgres-service.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/1705c1da-8964-4098-a727-dd796c427a2c)
+
+Ensure all deployments are active and healthy:
+
+`Kubectl get deployments`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/af54673e-a60f-4879-8f67-176b8f3b8f2e)
+
+Also, validate the services associated with the deployments:
+
+`kubectl get service`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/cdd87b74-82ef-4b41-820c-03ef78525e68)
+
+## Step 5: Worker and Result App Deployment
+
+Next, deploy the result application:
+
+`kubectl create -f result-app-deploy.yaml`
+
+And the service:
+
+`kubectl create -f result-app-service.yaml`
+
+Deploy the worker application:
+
+`kubectl create -f worker-app-deploy.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/707c82ec-843b-4947-b84c-d237e1debb41)
+
+confirm all services are setup
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/b92a0133-6961-4291-9a82-6738ae045f9a)
+
+## Step 6: Final Confirmation
+
+To be certain, do a final check of both the deployments and services to confirm everything is in order:
+
+`Kubectl get deployments`
+
+`kubectl get service`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/60fdd28b-a896-45d4-b708-6173a9ee6798)
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/4e62b8dd-9199-463e-872a-9cb3b36f3277)
+
+## Step 7: Accessing the Services
+
+To access the voting frontend service locally, use the following command:
+
+`kubectl port-forward service/voting-service 8080:80`
+
+For accessing the result backend service locally, utilize:
+
+`kubectl port-forward service/result-service 8081:80`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/28b8ecbc-3074-431e-8767-85865696a69a)
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/52aef43a-c2f1-4f32-99ea-d92297cacb6a)
+
+## Step 8: Scaling the Application
+
+If there's a need to accommodate more traffic, consider scaling up the voting app deployment. For instance, to run three replicas, execute:
+
+`kubectl scale deployment voting-app-deploy --replicas=3`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/880491c1-0511-4ba1-ba46-4252d837a6a2)
+
+To validate that the scaling took effect, check the number of pods:
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/e15a99bb-be5f-4e6d-94d4-0f004d163582)
+
+This should confirm that there are three instances of the voting app.
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/a30a5050-d95d-43ad-b3b4-788a58f35dca)
+
+With this setup, every time the voting page is refreshed, it is highly likely that a different pod will serve the request, showcasing the load distribution across the replicas.
