@@ -34,5 +34,30 @@ Each of these components is containerized and managed by Kubernetes, ensuring sc
 - Inside the "voting app" directory, I crafted a deployment configuration file named voting-app-deploy.yaml.
 - The contents of this file are as follows:
 
-
+`apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-app-deploy
+  labels:
+    name: voting-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: voting-app-pod
+      app: demo-voting-app
+    
+  template:
+    metadata:
+      name: voting-app-pod
+      labels:
+        name: voting-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: voting-app
+          image: kodekloud/examplevotingapp_vote:v1
+          ports:
+            - containerPort: 80`
 
