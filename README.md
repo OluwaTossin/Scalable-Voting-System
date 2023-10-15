@@ -140,8 +140,6 @@ spec:
 •	For the database layer of our application, I set up a PostgreSQL deployment.
 •	The deployment configuration was established in a file named postgres-deployment.yaml and service in a postgres-service.yaml configuration file
 
-with the details outlined below:
-
 postgres-deployment.yaml
 ```
 apiVersion: apps/v1
