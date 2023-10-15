@@ -280,3 +280,19 @@ spec:
     name: result-app-pod
     app: demo-voting-app
 ```
+With all deployment definition files ready, it's time to switch to the terminal. Here, I'll initiate the deployment processes and configure their respective services for seamless interactions.
+
+#Terminal Steps for Deployment
+
+## Step 1:
+Begin by ensuring the cluster is free from any non-default pods and services.
+`kubectl get pods`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/fe8da23e-48a2-498a-a988-07cfccb4bd80)
+
+From my observations, there are no extra pods and services active other than those that come default with Kubernetes.
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/ae224738-9d62-4bec-a3f6-b2eab3369f56)
+
+
+
