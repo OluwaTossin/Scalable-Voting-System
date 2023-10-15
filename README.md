@@ -3,7 +3,7 @@
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/c17eb6cf-4916-48f3-b38d-93935001ce82)
 
 
-After concluding the Kubernetes class on @kodedkoud, I've successfully deployed the Voting App on Kubernetes using Deployments. This class project allowed me to apply what I learned, integrating multiple tech stacks like Python, Redis, .NET, PostgreSQL, and Node.js. Deploying it on Kubernetes emphasized the importance of container orchestration in real-world scenarios.
+After concluding the Kubernetes class on @KodeKloud, I've successfully deployed the Voting App on Kubernetes using Deployments. This class project allowed me to apply what I learned, integrating multiple tech stacks like Python, Redis, .NET, PostgreSQL, and Node.js. Deploying it on Kubernetes emphasized the importance of container orchestration in real-world scenarios.
 
 ## Components and their interactions
 
