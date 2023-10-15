@@ -1,4 +1,4 @@
-# Scalable Voting System: Deploying a Multi-Tier Application on Kubernetes
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/5a5ed073-2e7b-452f-9f4d-4014e9710226)# Scalable Voting System: Deploying a Multi-Tier Application on Kubernetes
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/1a951e21-1bd6-4bb0-ae67-c6c777fbdd92)
 
@@ -294,5 +294,34 @@ From my observations, there are no extra pods and services active other than tho
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/ae224738-9d62-4bec-a3f6-b2eab3369f56)
 
+## Step 2: Deployment of the Voting App
+Initiate the deployment for the voting app using:
+
+`kubectl create -f voting-app-deployment.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/16cc008e-e83c-4daa-be84-bb87b177facf)
+
+Once the deployment is completed, proceed with creating the associated service:
+`kubectl create -f voting-app-service.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/35c09ad0-e89e-4800-8060-be0b620bf5a7)
+
+It's crucial to verify that our deployments are functioning as intended. Check their status with:
+`Kubectl get deployment`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/0759b172-8c91-4708-acb2-7d23e3c85e00)
+
+The output should indicate that the voting app is up and operational.
+
+## Step 3: Deployment of Redis
+Now, let's establish the Redis deployment using:
+`kubectl create -f redis-deploy.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/91c49cb6-bc77-44b5-b833-5516e28ac3d3)
+
+Once deployed, it's time to create the corresponding service for Redis:
+`kubectl create -f redis-service.yaml`
+
+![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/a129ebe2-0a5b-4b29-82f3-743b440d05ab)
 
 
