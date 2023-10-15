@@ -309,6 +309,7 @@ Once the deployment is completed, proceed with creating the associated service:
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/35c09ad0-e89e-4800-8060-be0b620bf5a7)
 
 It's crucial to verify that our deployments are functioning as intended. Check their status with:
+
 `Kubectl get deployment`
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/0759b172-8c91-4708-acb2-7d23e3c85e00)
