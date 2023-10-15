@@ -137,8 +137,8 @@ spec:
 ```
 
 ## Step 4: create a postgress.deployment.yaml
-•	For the database layer of our application, I set up a PostgreSQL deployment.
-•	The deployment configuration was established in a file named postgres-deployment.yaml and service in a postgres-service.yaml configuration file
+- For the database layer of our application, I set up a PostgreSQL deployment.
+- The deployment configuration was established in a file named postgres-deployment.yaml and service in a postgres-service.yaml configuration file
 
 postgres-deployment.yaml
 ```
@@ -194,5 +194,36 @@ spec:
   selector:
     name: postgres-pod
     app: demo-voting-app
+
+```
+## Step 5: Next is to create the worker-app-deployment.yaml
+- To process and handle backend operations, a Worker App deployment was created.
+- This was defined in the worker-app-deployment.yaml file, structured as:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-app-deploy
+  labels:
+    name: worker-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: worker-app-pod
+      app: demo-voting-app
+    
+  template:
+    metadata:
+      name: worker-app-pod
+      labels:
+        name: worker-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: worker-app
+          image: kodekloud/examplevotingapp_worker:v1
 
 ```
