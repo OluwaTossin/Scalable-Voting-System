@@ -61,5 +61,5 @@ spec:
           image: kodekloud/examplevotingapp_vote:v1
           ports:
             - containerPort: 80
-            ```
+```
 
