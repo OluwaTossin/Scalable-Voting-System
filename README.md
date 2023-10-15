@@ -1,4 +1,4 @@
-![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/5a5ed073-2e7b-452f-9f4d-4014e9710226)# Scalable Voting System: Deploying a Multi-Tier Application on Kubernetes
+# Scalable Voting System: Deploying a Multi-Tier Application on Kubernetes
 
 ![image](https://github.com/OluwaTossin/Scalable-Voting-System/assets/121174963/1a951e21-1bd6-4bb0-ae67-c6c777fbdd92)
 
