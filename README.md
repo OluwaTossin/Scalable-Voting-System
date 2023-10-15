@@ -31,9 +31,10 @@ Each of these components is containerized and managed by Kubernetes, ensuring sc
 - Within this directory, I generated individual pod definition files for each component of the application.
 
 ## Step 2: Deployment Configuration for the Voting App
-- Inside the "voting app" directory, I crafted a deployment configuration file named voting-app-deploy.yaml.
+- Inside the "voting app" directory, I crafted a deployment configuration file named voting-app-deploy.yaml and a voting-app-service.yaml.
 - The contents of this file are as follows:
 
+voting-app-deploy.yaml
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -63,10 +64,30 @@ spec:
             - containerPort: 80
 ```
 
-## Step 3:
-Next is to create a redis deployment. Create a definition file with the below:
-redis-deploy.yaml
+voting-app-service.yaml
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service
+  labels:
+    name: voting-service
+    app: demo-voting-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    name: voting-app-pod
+    app: demo-voting-app
 
+```
+
+## Step 3:
+Next is to create a redis deployment and its service. Create a definition file with the below:
+
+redis-deploy.yaml
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -96,10 +117,32 @@ spec:
             - containerPort: 6379
 ```
 
-## Step 4: create a postgress.deployment.yaml with the below:
-•	For the database layer of our application, I set up a PostgreSQL deployment.
-•	The deployment configuration was established in a file named postgres-deployment.yaml with the details outlined below:
+redis-service.yaml
 
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    name: redis-service
+    app: demo-voting-app
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    name: redis-pod
+    app: demo-voting-app
+```
+
+## Step 4: create a postgress.deployment.yaml
+•	For the database layer of our application, I set up a PostgreSQL deployment.
+•	The deployment configuration was established in a file named postgres-deployment.yaml and service in a postgres-service.yaml configuration file
+
+with the details outlined below:
+
+postgres-deployment.yaml
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -134,5 +177,24 @@ spec:
               value: "postgres"
             - name: POSTGRES_HOST_AUTH_METHOD
               value: trust
+
+```
+postgres-service.yaml 
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    name: postgres-service
+    app: demo-voting-app
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    name: postgres-pod
+    app: demo-voting-app
 
 ```
